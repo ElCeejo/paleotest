@@ -1,0 +1,8 @@
+#    Allows mobs to breed
+breeding (Breeding) bool true
+
+#    Allows large mobs to destroy blocks weaker than soil
+block_breaking (Block Breaking) bool false
+
+#    If you're on a world that used a 1.x version of PaleoTest, keep this true
+legacy_convert (1.x to 2.0+ Conversion) bool true
