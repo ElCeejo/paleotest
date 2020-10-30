@@ -20,7 +20,7 @@ local function set_mob_tables(self)
                     paleotest.find_string(entity.targets, self.name) then
                     if entity.object:get_armor_groups() and
                         entity.object:get_armor_groups().fleshy then
-                        table.insert(self.rivals, name)
+                        table.insert(self.predators, name)
                     end
                 end
             end
@@ -85,8 +85,8 @@ local function carnotaurus_logic(self)
                     if self.mood < 70 or not self.tamed then
                         mob_core.logic_attack_mobs(self, 12)
                     end
-                    if #self.rivals > 0 then
-                        mob_core.logic_attack_mobs(self, 12, self.rivals)
+                    if #self.predators > 0 then
+                        paleotest.logic_flee_or_fight(self, 12)
                     end
                 end
             end
@@ -206,7 +206,7 @@ minetest.register_entity("paleotest:carnotaurus", {
     punch_cooldown = 1,
     defend_owner = true,
     targets = {},
-    rivals = {},
+    predators = {},
     follow = paleotest.global_meat,
     drops = {
         {name = "paleotest:dinosaur_meat_raw", chance = 1, min = 2, max = 4}
