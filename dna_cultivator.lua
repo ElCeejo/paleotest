@@ -265,7 +265,10 @@ dna_cultivator.register_recipe("paleotest:dna_thylacoleo",
 -- Dinosaurs and Terrestrial Reptiles --
 
 dna_cultivator.register_recipe("paleotest:dna_brachiosaurus",
-                               "paleotest:egg_brachiosaurus")
+							   "paleotest:egg_brachiosaurus")
+							   
+dna_cultivator.register_recipe("paleotest:dna_carnotaurus",
+                               "paleotest:egg_carnotaurus")
 
 dna_cultivator.register_recipe("paleotest:dna_pteranodon",
                                "paleotest:egg_pteranodon")

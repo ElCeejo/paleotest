@@ -2,14 +2,16 @@
 -- Fossil Analyzer --
 ---------------------
 ------ Ver 2.0 ------
+
 local fossil_output = {
-    "paleotest:dna_brachiosaurus", "paleotest:dna_dunkleosteus",
-    "paleotest:dna_plesiosaurus", "paleotest:dna_mosasaurus",
-    "paleotest:dna_pteranodon", "paleotest:dna_sarcosuchus",
-    "paleotest:dna_spinosaurus", "paleotest:dna_stegosaurus",
-    "paleotest:dna_triceratops", "paleotest:dna_tyrannosaurus",
-    "paleotest:dna_velociraptor", "default:sand 3", "default:gravel 3",
-    "bones:bones", "default:sand 3", "default:gravel 3", "bones:bones",
+	"paleotest:dna_brachiosaurus", "paleotest:dna_carnotaurus",
+	"paleotest:dna_dunkleosteus", "paleotest:dna_plesiosaurus",
+	"paleotest:dna_mosasaurus", "paleotest:dna_pteranodon",
+	"paleotest:dna_sarcosuchus", "paleotest:dna_spinosaurus",
+	"paleotest:dna_stegosaurus", "paleotest:dna_triceratops",
+	"paleotest:dna_tyrannosaurus",  "paleotest:dna_velociraptor",
+	"default:sand 3", "default:gravel 3", "bones:bones",
+	"default:sand 3", "default:gravel 3", "bones:bones",
     "default:sand 3", "default:gravel 3", "bones:bones"
 }
 local waste_fossil = {"default:sand 3", "default:gravel 3", "default:cobble 3"}

@@ -163,6 +163,11 @@ minetest.register_craftitem("paleotest:dna_brachiosaurus", { -- Brachiosaurus DN
 	inventory_image = "paleotest_dna.png",
 })
 
+minetest.register_craftitem("paleotest:dna_carnotaurus", { -- Carnotaurus DNA
+	description = "Carnotaurus DNA",
+	inventory_image = "paleotest_dna.png",
+})
+
 minetest.register_craftitem("paleotest:dna_dire_wolf", { -- Dire Wolf DNA
 	description = "Dire Wolf DNA",
 	inventory_image = "paleotest_dna.png",
