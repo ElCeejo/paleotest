@@ -83,7 +83,7 @@ minetest.register_craftitem("paleotest:seeds_cycad", {
                                   {name = "paleotest:cycad_1", param2 = 4})
                 minetest.sound_play("default_place_node",
                                     {pos = pointed_thing.above, gain = 1.0})
-                if creative then
+                if not creative then
                     itemstack:take_item()
                     return itemstack
                 end
@@ -248,7 +248,7 @@ minetest.register_craftitem("paleotest:seeds_horsetail", {
                                   {name = "paleotest:horsetail_1", param2 = 2})
                 minetest.sound_play("default_place_node",
                                     {pos = pointed_thing.above, gain = 1.0})
-                if creative then
+                if not creative then
                     itemstack:take_item()
                     return itemstack
                 end
