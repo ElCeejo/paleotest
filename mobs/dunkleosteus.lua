@@ -81,7 +81,7 @@ minetest.register_entity("paleotest:dunkleosteus", {
     jump_height = 1.26,
     buoyancy = 1,
     springiness = 0,
-    obstacle_avoidance_range = 8,
+    obstacle_avoidance_range = 1.5,
     surface_avoidance_range = 2,
     floor_avoidance_range = 2,
     -- Visual

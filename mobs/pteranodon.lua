@@ -123,6 +123,7 @@ minetest.register_entity("paleotest:pteranodon", {
     max_fall = 3,
     buoyancy = 1,
     springiness = 0,
+    obstacle_avoidance_range = 20,
     -- Visual
     collisionbox = {-0.3, -0.3, -0.3, 0.3, 0.5, 0.3},
     visual_size = {x = 11, y = 11},

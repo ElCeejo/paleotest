@@ -84,7 +84,7 @@ minetest.register_entity("paleotest:plesiosaurus", {
     jump_height = 1.26,
     buoyancy = 1,
     springiness = 0,
-    obstacle_avoidance_range = 3,
+    obstacle_avoidance_range = 2,
     surface_avoidance_range = 1,
     floor_avoidance_range = 1,
     turn_rate = 4,

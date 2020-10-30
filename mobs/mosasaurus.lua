@@ -90,7 +90,7 @@ minetest.register_entity("paleotest:mosasaurus", {
     jump_height = 1.26,
     buoyancy = 1,
     springiness = 0,
-    obstacle_avoidance_range = 6,
+    obstacle_avoidance_range = 1.5,
     surface_avoidance_range = 4,
     floor_avoidance_range = 4,
     -- Visual

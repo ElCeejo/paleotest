@@ -174,7 +174,7 @@ minetest.register_entity("paleotest:sarcosuchus", {
     max_fall = 3,
     buoyancy = 1,
     springiness = 0,
-    obstacle_avoidance_range = 6,
+    obstacle_avoidance_range = 1.5,
     surface_avoidance_range = 1,
     floor_avoidance_range = 4,
     -- Visual
