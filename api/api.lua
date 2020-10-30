@@ -90,12 +90,36 @@ function paleotest.on_step(self, dtime, moveresult)
 	if not mobkit.is_alive(self) then return end
 	mob_core.collision_detection(self)
 	-- Vitals and other Functions
-	if mobkit.timer(self, 1) then
+	if mobkit.timer(self, 1) then -- 1 Second Timer
 		mob_core.vitals(self)
 		mob_core.random_sound(self)
 		mob_core.growth(self)
-		paleotest.handle_sleep(self)
 		paleotest.breed(self, self.live_birth)
+		if self.sleep_timer > 0 then
+			self.sleep_timer = mobkit.remember(self, "sleep_timer", self.sleep_timer-1)
+		end
+		if self.imprint_tame
+		and not self.tamed
+		or (self.growth_stage == 4
+		and self.imprint_exp_timer > 0) then
+			if self.imprint_cooldown >= 0 then
+				self.imprint_cooldown = self.imprint_cooldown - 1
+				self.can_imprint = false
+			else
+				self.imprint_exp_timer = self.imprint_exp_timer - 1
+			end
+			if self.imprint_cooldown <= 0 then
+				self.can_imprint = true
+			end
+			if self.imprint_exp_timer <= 0 then
+				self.can_imprint = false
+				self.imprint_level = 0
+			end
+			mobkit.remember(self, "imprint_cooldown", self.imprint_cooldown)
+			mobkit.remember(self, "imprint_exp_timer", self.imprint_exp_timer)
+			mobkit.remember(self, "imprint_level", self.imprint_level)
+			mobkit.remember(self, "can_imprint", self.can_imprint)
+		end
 	end
 	-- Keep track of hunger and mood
 	if self.needs_enrichment then
@@ -135,8 +159,13 @@ function paleotest.on_step(self, dtime, moveresult)
 			end
 		end
 	end
-	mobkit.remember(self, "hunger", self.hunger)
-	mobkit.remember(self, "mood", self.mood)
+	if mobkit.recall(self, "hunger") ~= self.hunger then
+		mobkit.remember(self, "hunger", self.hunger)
+	end
+	if mobkit.recall(self, "mood") ~= self.mood then
+		mobkit.remember(self, "mood", self.mood)
+	end
+	
 	-- Check if in shallow water
 	local pos = mobkit.get_stand_pos(self)
 	local half_height = vector.new(pos.x, pos.y + self.height/2, pos.z)
@@ -152,37 +181,6 @@ function paleotest.on_step(self, dtime, moveresult)
 	else
 		self.is_in_shallow = false
 		self.is_in_deep = false
-	end
-	-- Check for nearby feeders
-
-	self.nearest_carnivore_feeder = find_feeder(self, "paleotest:carnivore_feeder")
-	
-	self.nearest_herbivore_feeder = find_feeder(self, "paleotest:herbivore_feeder")
-
-	self.nearest_piscivore_feeder = find_feeder(self, "paleotest:piscivore_feeder")
-
-	-- Keep track of imprint tame
-	if self.imprint_tame
-	and not self.tamed
-	or (self.growth_stage == 4
-	and self.imprint_exp_timer > 0) then
-		if self.imprint_cooldown >= 0 then
-			self.imprint_cooldown = self.imprint_cooldown - self.dtime
-			self.can_imprint = false
-		else
-			self.imprint_exp_timer = self.imprint_exp_timer - self.dtime
-		end
-		if self.imprint_cooldown <= 0 then
-			self.can_imprint = true
-		end
-		if self.imprint_exp_timer <= 0 then
-			self.can_imprint = false
-			self.imprint_level = 0
-		end
-		mobkit.remember(self, "imprint_cooldown", self.imprint_cooldown)
-		mobkit.remember(self, "imprint_exp_timer", self.imprint_exp_timer)
-		mobkit.remember(self, "imprint_level", self.imprint_level)
-		mobkit.remember(self, "can_imprint", self.can_imprint)
 	end
 end
 

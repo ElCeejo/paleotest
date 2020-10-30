@@ -407,12 +407,6 @@ local function get_time()
     return time
 end
 
-function paleotest.handle_sleep(self)
-    if self.sleep_timer > 0 then -- Make sure mobs don't sleep while in the middle of attacking
-		self.sleep_timer = mobkit.remember(self, "sleep_timer", self.sleep_timer-1)
-	end
-end
-
 function paleotest.lq_go_to_sleep(self)
     local func = function(self)
 		mobkit.animate(self, "sleep")
