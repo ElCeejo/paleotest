@@ -84,7 +84,7 @@ local function tyrannosaurus_logic(self)
                         table.insert(self.targets, self.name)
                         mob_core.logic_attack_mobs(self, 12)
                     end
-                    if self.mood < 50 or not self.tamed then
+                    if self.mood < 90 or not self.tamed then
                         mob_core.logic_attack_mobs(self, 12)
                     end
                     if #self.rivals > 0 then
