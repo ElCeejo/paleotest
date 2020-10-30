@@ -249,6 +249,8 @@ minetest.register_craftitem("paleotest:dna_velociraptor", { -- Velociraptor DNA
 
 paleotest.register_egg("paleotest:brachiosaurus", 1.25, true)
 
+paleotest.register_egg("paleotest:carnotaurus", 0.75, true)
+
 paleotest.register_egg("paleotest:pteranodon", 0.25, true)
 
 paleotest.register_egg("paleotest:sarcosuchus", 0.75, false)

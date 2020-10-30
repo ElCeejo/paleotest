@@ -122,6 +122,7 @@ dofile(path.."/feeders.lua")
 -- Dinosaurs
 
 dofile(path.."/mobs/brachiosaurus.lua")
+dofile(path.."/mobs/carnotaurus.lua")
 dofile(path.."/mobs/stegosaurus.lua")
 dofile(path.."/mobs/spinosaurus.lua")
 dofile(path.."/mobs/triceratops.lua")
