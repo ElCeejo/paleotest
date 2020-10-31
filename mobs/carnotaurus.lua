@@ -112,6 +112,7 @@ local function carnotaurus_logic(self)
             end
 
             if prty < 6 then
+                if self.status == "sleeping" then return end
                 if math.random(1, self.mood) == 1 then
                     if paleotest.can_find_post(self) then
                         paleotest.logic_play_with_post(self, 6)
