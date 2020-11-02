@@ -86,21 +86,21 @@ local function sarcosuchus_logic(self)
             if self.attacks == "mobs" or self.attacks == "all" then
                 table.insert(self.targets, self.name)
                 if self.is_in_deep then
-                    mob_core.logic_aquatic_attack_mob(self, 10)
+                    mob_core.logic_aqua_attack_mob(self, 10)
                 else
                     mob_core.logic_attack_mobs(self, 10)
                 end
             end
             if self.mood < 50 then
                 if self.is_in_deep then
-                    mob_core.logic_aquatic_attack_mob(self, 10)
+                    mob_core.logic_aqua_attack_mob(self, 10)
                 else
                     mob_core.logic_attack_mobs(self, 10)
                 end
             end
             if #self.rivals >= 1 then
                 if self.is_in_deep then
-                    mob_core.logic_aquatic_attack_mob(self, 10, self.rivals)
+                    mob_core.logic_aqua_attack_mob(self, 10, self.rivals)
                 else
                     mob_core.logic_attack_mobs(self, 10, self.rivals)
                 end
@@ -112,14 +112,14 @@ local function sarcosuchus_logic(self)
                 if self.child then return end
                 if self.mood < 50 and player:get_player_name() ~= self.owner then
                     if self.is_in_deep then
-                        mob_core.logic_aquatic_attack_player(self, 8, player)
+                        mob_core.logic_aqua_attack_player(self, 8, player)
                     else
                         mob_core.logic_attack_player(self, 8, player)
                     end
                 end
                 if self.mood < 50 then
                     if self.is_in_deep then
-                        mob_core.logic_aquatic_attack_player(self, 8, player)
+                        mob_core.logic_aqua_attack_player(self, 8, player)
                     else
                         mob_core.logic_attack_player(self, 8, player)
                     end
@@ -241,6 +241,8 @@ minetest.register_entity("paleotest:sarcosuchus", {
     on_activate = function(self, staticdata, dtime_s)
         paleotest.on_activate(self, staticdata, dtime_s)
         self.swim_timer = mobkit.recall(self, "swim_timer") or 40
+        self.bone_goal = {}
+        self.object:set_bone_position("Bone.007", {x = 0, y = 0, z = 0}, {x = 0, y = 0, z = 180})
     end,
     on_step = paleotest.on_step,
     on_rightclick = function(self, clicker)

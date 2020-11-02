@@ -86,21 +86,21 @@ local function spinosaurus_logic(self)
             if self.attacks == "mobs" or self.attacks == "all" then
                 table.insert(self.targets, self.name)
                 if self.is_in_deep then
-                    mob_core.logic_aquatic_attack_mob(self, 10)
+                    mob_core.logic_aqua_attack_mob(self, 10)
                 else
                     mob_core.logic_attack_mobs(self, 10)
                 end
             end
             if self.mood < 50 then
                 if self.is_in_deep then
-                    mob_core.logic_aquatic_attack_mob(self, 10)
+                    mob_core.logic_aqua_attack_mob(self, 10)
                 else
                     mob_core.logic_attack_mobs(self, 10)
                 end
             end
             if #self.rivals >= 1 then
                 if self.is_in_deep then
-                    mob_core.logic_aquatic_attack_mob(self, 10, self.rivals)
+                    mob_core.logic_aqua_attack_mob(self, 10, self.rivals)
                 else
                     mob_core.logic_attack_mobs(self, 10, self.rivals)
                 end
@@ -112,14 +112,14 @@ local function spinosaurus_logic(self)
                 if self.child then return end
                 if self.mood < 75 and player:get_player_name() ~= self.owner then
                     if self.is_in_deep then
-                        mob_core.logic_aquatic_attack_player(self, 8, player)
+                        mob_core.logic_aqua_attack_player(self, 8, player)
                     else
                         mob_core.logic_attack_player(self, 8, player)
                     end
                 end
                 if self.mood < 50 then
                     if self.is_in_deep then
-                        mob_core.logic_aquatic_attack_player(self, 8, player)
+                        mob_core.logic_aqua_attack_player(self, 8, player)
                     else
                         mob_core.logic_attack_player(self, 8, player)
                     end
