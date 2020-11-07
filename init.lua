@@ -101,7 +101,6 @@ end
 
 local path = minetest.get_modpath("paleotest")
 
-
 -- API
 dofile(path.."/api/api.lua")
 dofile(path.."/api/hq_lq.lua")
@@ -113,6 +112,7 @@ end
 -- Items
 dofile(path.."/nodes.lua")
 dofile(path.."/craftitems.lua")
+dofile(path.."/crafting.lua")
 dofile(path.."/ores.lua")
 dofile(path.."/fossil_analyzer.lua")
 dofile(path.."/dna_cultivator.lua")
@@ -131,6 +131,7 @@ dofile(path.."/mobs/velociraptor.lua")
 
 -- Reptiles
 dofile(path.."/mobs/pteranodon.lua")
+dofile(path.."/mobs/quetzalcoatlus.lua")
 dofile(path.."/mobs/sarcosuchus.lua")
 
 -- Aquatic Mobs
