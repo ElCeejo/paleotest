@@ -203,19 +203,6 @@ minetest.register_node("paleotest:dna_cultivator", {
     end
 })
 
----------------------
--- Crafting Recipe --
----------------------
-
-minetest.register_craft({
-    output = "paleotest:dna_cultivator",
-    recipe = {
-        {"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
-        {"default:glass", "bucket:bucket_water", "default:glass"},
-        {"default:steel_ingot", "default:bronze_ingot", "default:steel_ingot"}
-    }
-})
-
 -------------------------
 -- Recipe Registration --
 -------------------------
@@ -272,6 +259,9 @@ dna_cultivator.register_recipe("paleotest:dna_carnotaurus",
 
 dna_cultivator.register_recipe("paleotest:dna_pteranodon",
                                "paleotest:egg_pteranodon")
+
+dna_cultivator.register_recipe("paleotest:dna_quetzalcoatlus",
+                               "paleotest:egg_quetzalcoatlus")                   
 
 dna_cultivator.register_recipe("paleotest:dna_sarcosuchus",
                                "paleotest:egg_sarcosuchus")

@@ -6,10 +6,11 @@
 local fossil_output = {
 	"paleotest:dna_brachiosaurus", "paleotest:dna_carnotaurus",
 	"paleotest:dna_dunkleosteus", "paleotest:dna_plesiosaurus",
-	"paleotest:dna_mosasaurus", "paleotest:dna_pteranodon",
-	"paleotest:dna_sarcosuchus", "paleotest:dna_spinosaurus",
-	"paleotest:dna_stegosaurus", "paleotest:dna_triceratops",
-	"paleotest:dna_tyrannosaurus",  "paleotest:dna_velociraptor",
+    "paleotest:dna_mosasaurus","paleotest:dna_quetzalcoatlus",
+    "paleotest:dna_pteranodon", "paleotest:dna_sarcosuchus",
+    "paleotest:dna_spinosaurus", "paleotest:dna_stegosaurus",
+    "paleotest:dna_triceratops", "paleotest:dna_tyrannosaurus",
+    "paleotest:dna_velociraptor",
 	"default:sand 3", "default:gravel 3", "bones:bones",
 	"default:sand 3", "default:gravel 3", "bones:bones",
     "default:sand 3", "default:gravel 3", "bones:bones"
@@ -247,19 +248,6 @@ minetest.register_node("paleotest:fossil_analyzer", {
         minetest.remove_node(pos)
         return drops
     end
-})
-
----------------------
--- Crafting Recipe --
----------------------
-
-minetest.register_craft({
-    output = "paleotest:fossil_analyzer",
-    recipe = {
-        {"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
-        {"default:steel_ingot", "default:copper_ingot", "default:steel_ingot"},
-        {"default:bronze_ingot", "default:bronze_ingot", "default:bronze_ingot"}
-    }
 })
 
 -------------------------

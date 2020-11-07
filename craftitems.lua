@@ -16,15 +16,6 @@ minetest.register_tool("paleotest:whip", {
 	groups = {flammable = 1},
 })
 
-minetest.register_craft({
-	output = "paleotest:whip",
-	recipe = {
-		{"", "", "farming:cotton"},
-		{"", "default:stick", "farming:cotton"},
-		{"default:stick", "", "farming:cotton"},
-	}
-})
-
 -----------------
 -- Field Guide --
 -----------------
@@ -34,15 +25,6 @@ minetest.register_craftitem("paleotest:field_guide", {
 	inventory_image = "paleotest_field_guide.png",
 	wield_image = "paleotest_field_guide.png",
 	groups = {flammable = 1, book = 1}
-})
-
-minetest.register_craft({
-	output = "paleotest:field_guide",
-	recipe = {
-		{"", "", ""},
-		{"group:fossil", "", ""},
-		{"default:book", "group:color_blue", ""},
-	}
 })
 
 -----------
@@ -208,6 +190,11 @@ minetest.register_craftitem("paleotest:dna_pteranodon", { -- Pteranodon DNA
 	inventory_image = "paleotest_dna.png",
 })
 
+minetest.register_craftitem("paleotest:dna_quetzalcoatlus", { -- Quetzalcoatlus DNA
+	description = "Quetzalcoatlus DNA",
+	inventory_image = "paleotest_dna.png",
+})
+
 minetest.register_craftitem("paleotest:dna_sarcosuchus", { -- Sarcosuchus DNA
 	description = "Sarcosuchus DNA",
 	inventory_image = "paleotest_dna.png",
@@ -257,6 +244,8 @@ paleotest.register_egg("paleotest:brachiosaurus", 1.25, true)
 paleotest.register_egg("paleotest:carnotaurus", 0.75, true)
 
 paleotest.register_egg("paleotest:pteranodon", 0.25, true)
+
+paleotest.register_egg("paleotest:quetzalcoatlus", 0.75, true)
 
 paleotest.register_egg("paleotest:sarcosuchus", 0.75, false)
 
@@ -366,7 +355,6 @@ local function ball_physics(self)
 	end
 end
 
-
 local ball_def = {
     max_hp = 10,
     armor_groups = {immortal = 1},
@@ -447,54 +435,4 @@ minetest.register_craftitem("paleotest:pursuit_ball", {
             return itemstack
         end
     end,
-})
-
-------------
--- Crafts --
-------------
-
-minetest.register_craft({
-	output = "paleotest:pursuit_ball",
-	recipe = {
-		{"farming:string", "wool:pink", "farming:string"},
-		{"wool:pink", "farming:cotton", "wool:pink"},
-		{"farming:string", "wool:pink", "farming:string"},
-	}
-})
-
-minetest.register_craft({
-	output = "paleotest:scratching_post",
-	recipe = {
-		{"wool:white", "default:wood", "wool:white"},
-		{"wool:white", "default:wood", "wool:white"},
-		{"default:tree", "default:tree", "default:tree"},
-	}
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "paleotest:dinosaur_meat_raw",
-	recipe = "paleotest:dinosaur_meat_cooked",
-	cooktime = 5
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "paleotest:mammal_meat_raw",
-	recipe = "paleotest:mammal_meat_cooked",
-	cooktime = 5
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "paleotest:reptile_meat_raw",
-	recipe = "paleotest:reptile_meat_cooked",
-	cooktime = 5
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "paleotest:fish_meat_raw",
-	recipe = "paleotest:fish_meat_cooked",
-	cooktime = 5
 })
