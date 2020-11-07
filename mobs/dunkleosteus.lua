@@ -55,8 +55,8 @@ local function dunkleosteus_logic(self)
         end
 
         if prty < 4 then
-            if player then
-                if self.child then return end
+            if player
+            and not self.child then
                 mob_core.logic_aqua_attack_player(self, 4, player)
             end
         end
