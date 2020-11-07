@@ -331,7 +331,11 @@ local function set_order(self,player,order)
 		mobkit.clear_queue_low(self)
 		self.status = mobkit.remember(self, "status", "following")
 		self.order = mobkit.remember(self, "order", "follow")
-		mobkit.hq_follow(self, 15, player)
+		if self.aerial_follow then
+			paleotest.hq_aerial_follow(self, 20, player)
+		else
+			mobkit.hq_follow(self, 20, player)
+		end
 	end
 end
 

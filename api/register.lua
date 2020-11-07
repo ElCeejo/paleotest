@@ -19,8 +19,8 @@ minetest.register_on_mods_loaded(function()
 end)
 
 local common_names = {
-    "cow", "calf", "pig", "hog", "lamb", "sheep", "goat", "deer", "dire_wolf",
-    "elasmotherium", "procoptodon", "mammoth", "smilodon", "thylacoleo"
+    "cow", "calf", "pig", "hog", "lamb", "sheep", "goat", "deer", "horse",
+    "dire_wolf", "elasmotherium", "procoptodon", "mammoth", "smilodon", "thylacoleo"
 }
 
 local function round(x) return x + 0.5 - (x + 0.5) % 1 end
@@ -128,18 +128,24 @@ function paleotest.register_fg_entry(self, def)
     else
         def.image = def.male_image
     end
+    local imprint_data = ""
+    if self.imprint_tame then
+        local time_to_imprint = self.imprint_cooldown
+        imprint_data = "label[2.5,9.1;"..blk("Time until next imprint: " .. time_to_imprint).. "]"
+    end
     local field_guide_formspec = {
         "formspec_version[3]", "size[16,10]",
         "background[-0.7,-0.5;17.5,11.5;paleotest_field_guide_formspec.png]",
         -- Basic Info
         "label[3,1;", blk(name), "]", "image[0,0;8,8;" .. def.image .. "]",
         "label[2.5,7;", blk("Temperament: " .. def.temper), "]",
-        "label[2.5,7.3;", blk("Diet: " .. def.diet), "]", "label[2.5,7.6;",
-        blk("Owner: " .. owner), "]", "label[2.5,7.9;",
-        blk("Gender: " .. gender), "]", "label[2.5,8.2;",
-        blk("Order: " .. order), "]", "label[2.5,8.5;",
-        blk("Attacks: " .. attacks), "]", "label[2.5,8.8;",
-        blk("Growth Stage: " .. growth), "]", -- Health
+        "label[2.5,7.3;", blk("Diet: " .. def.diet), "]",
+        "label[2.5,7.6;", blk("Owner: " .. owner), "]",
+        "label[2.5,7.9;", blk("Gender: " .. gender), "]",
+        "label[2.5,8.2;", blk("Order: " .. order), "]",
+        "label[2.5,8.5;", blk("Attacks: " .. attacks), "]",
+        "label[2.5,8.8;", blk("Growth Stage: " .. growth), "]", -- Health
+        imprint_data,
         "label[12,1.5;", blk("Health"), "]",
         "image[11,2;3,3;paleotest_field_guide_hp_bar.png^[lowpart:" .. health ..
             ":paleotest_field_guide_hp_bar_full.png]", -- Hunger
@@ -263,9 +269,9 @@ function paleotest.register_syringe(mob, imprint)
         on_secondary_use = function(itemstack, player, pointed_thing)
             if pointed_thing.type == "object" then
                 local ent = pointed_thing.ref:get_luaentity()
-                for i = 1, #common_names do
+                for _, name in pairs(common_names) do
                     if (ent.logic or ent.brainfunc) and
-                        ent.name:match(common_names[i]) or ent.name == mob then
+                        ent.name:find(name) or ent.name == mob then
                         if ent.gender and ent.gender == "male" then
                             return
                         end

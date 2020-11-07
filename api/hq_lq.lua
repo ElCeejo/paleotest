@@ -9,6 +9,8 @@
 
 local abs = math.abs
 
+local vec_dist = vector.distance
+
 local function anim_length(self, anim)
 	if self.animation and self.animation[anim] then
 		local frame1 = self.animation[anim].range.x
@@ -24,6 +26,21 @@ local function hitbox(object)
 		object = object.object
 	end
     return object:get_properties().collisionbox
+end
+
+local function find_closest_pos(tbl, pos)
+    local iter = 2
+    if #tbl < 2 then return end
+    local closest = tbl[1]
+    while iter < #tbl do
+        if vec_dist(pos, closest) < vec_dist(pos, tbl[iter + 1]) then
+            iter = iter + 1
+        else
+            closest = tbl[iter]
+            iter = iter + 1
+        end
+    end
+    if iter >= #tbl and closest then return closest end
 end
 
 ------------------
@@ -43,7 +60,7 @@ function paleotest.lq_dumb_punch(self, target)
 		local tyaw = minetest.dir_to_yaw(vector.direction(pos, tpos))
 		if abs(tyaw-yaw) > 0.1 then
 			mobkit.turn2yaw(self, tyaw, 4)
-		elseif vector.distance(pos, tpos) < self.reach-hitbox(target)[4]
+		elseif vec_dist(pos, tpos) < self.reach-hitbox(target)[4]
 		and self.punch_timer <= 0 then
 			mobkit.animate(self, "punch")
 			target:punch(self.object, 1.0, {
@@ -80,7 +97,7 @@ function paleotest.hq_latch(self,prty,target)
         end
         local pos = mobkit.get_stand_pos(self)
         local tpos = mobkit.get_stand_pos(target)
-		local dist = vector.distance(pos,tpos)
+		local dist = vec_dist(pos,tpos)
 		if not self.latching then
 			timer = timer-1
 		end
@@ -120,16 +137,16 @@ function paleotest.hq_fight_and_flee(self, prty, target)
 		local tpos = target:get_pos()
 		if mobkit.is_queue_empty_low(self) then
 			mob_core.punch_timer(self)
-			if vector.distance(pos, tpos) < 8
+			if vec_dist(pos, tpos) < 8
 			and self.punch_timer <= 0 then
 				paleotest.lq_dumb_punch(self, target)
 			end
-			if vector.distance(pos, tpos) < self.view_range
-			and (vector.distance(pos, tpos) > 8
+			if vec_dist(pos, tpos) < self.view_range
+			and (vec_dist(pos, tpos) > 8
 			or self.punch_timer > 0) then
 				local fpos = {x=2*pos.x - tpos.x,y=tpos.y,z=2*pos.z - tpos.z}
 				mob_core.goto_next_waypoint(self, fpos)
-			elseif vector.distance(pos, tpos) > self.view_range then
+			elseif vec_dist(pos, tpos) > self.view_range then
 				mobkit.clear_queue_high(self)
 				mobkit.lq_idle(self, 1)
 				self.object:set_velocity({x=0,y=0,z=0})
@@ -192,7 +209,7 @@ function paleotest.hq_go_to_feeder(self, prty, search_for)
 			local meta = minetest.get_meta(feeder)
 			local food_level = meta:get_int("food_level")
 			if food_level < 1 then return true end
-			if vector.distance(pos,feeder) > self.collisionbox[4]+2 then
+			if vec_dist(pos,feeder) > self.collisionbox[4]+2 then
 				mob_core.goto_next_waypoint(self,feeder)
 			else
 				eat_from_feeder(self,feeder)
@@ -231,7 +248,7 @@ function paleotest.hq_aqua_go_to_feeder(self,prty,search_for)
 			local meta = minetest.get_meta(feeder)
 			local food_level = meta:get_int("food_level")
 			if food_level < 1 then return true end
-			if vector.distance(pos,feeder) > self.collisionbox[4]+3 then
+			if vec_dist(pos,feeder) > self.collisionbox[4]+3 then
 				mob_core.swim_to_next_waypoint(self,feeder)
 			else
 				eat_from_feeder(self,feeder)
@@ -259,7 +276,7 @@ function paleotest.hq_eat_items(self, prty)
 					and ent.name == "__builtin:item"
 					and ent.itemstring:match(self.follow[i]) then
 						local food = obj:get_pos()
-						if vector.distance(pos, food) > self.collisionbox[4] + 2 then
+						if vec_dist(pos, food) > self.collisionbox[4] + 2 then
 							mob_core.goto_next_waypoint(self, food)
 						else
 							mobkit.lq_turn2pos(self, food)
@@ -293,17 +310,20 @@ function paleotest.hq_graze(self, prty, search_for)
 		local pos1 = {x=pos.x-self.view_range,y=pos.y-self.view_range,z=pos.z-self.view_range}
 		local pos2 = {x=pos.x+self.view_range,y=pos.y+self.view_range,z=pos.z+self.view_range}
 		local food = minetest.find_nodes_in_area(pos1, pos2, search_for)
-		if mobkit.is_queue_empty_low(self) and self.isonground then
-			if #food < 1 then return true end
-            if vector.distance(pos,food[1]) > self.collisionbox[4]+1 then
+		if #food < 1 then return true end
+		local go_to = find_closest_pos(pos, food)
+		if mobkit.is_queue_empty_low(self)
+		and self.isonground
+		and go_to then
+            if vec_dist(pos, go_to) > self.collisionbox[4]+1 then
                 timer = timer - self.dtime
-                mob_core.goto_next_waypoint(self,food[1])
+                mob_core.goto_next_waypoint(self, go_to)
                 if timer <= 0 then
                     return true
                 end
 			else
 				mobkit.lq_idle(self,0.1)
-				minetest.set_node(food[1],{name="air"})
+				minetest.set_node(go_to, {name="air"})
 				return true
 			end
 		end
@@ -321,17 +341,19 @@ function paleotest.hq_graze_high(self,prty,search_for,height)
 		local pos2 = {x=pos.x+self.view_range,y=pos.y+height,z=pos.z+self.view_range}
 		local food = minetest.find_nodes_in_area(pos1, pos2, search_for)
 		if #food < 1 then return true end
-		if mobkit.is_queue_empty_low(self) and self.isonground then
-			pos.y = food[1].y
-            if vector.distance(pos,food[1]) > self.collisionbox[4]+self.reach then
+		local go_to = find_closest_pos(pos, food)
+		if mobkit.is_queue_empty_low(self)
+		and self.isonground
+		and go_to then
+            if vec_dist(pos, go_to) > self.collisionbox[4] + self.reach then
                 timer = timer - self.dtime
-                mob_core.goto_next_waypoint(self,food[1])
+                mob_core.goto_next_waypoint(self, go_to)
                 if timer <= 0 then
                     return true
                 end
 			else
 				self.object:set_velocity({x=0,y=0,z=0})
-				minetest.set_node(food[1],{name="air"})
+				minetest.set_node(go_to, {name="air"})
 				return true
 			end
 		end
@@ -481,7 +503,7 @@ function paleotest.logic_play_with_ball(self, prty)
 			and obj:get_luaentity().name == "paleotest:pursuit_ball_ent" then
 				if mobkit.is_queue_empty_low(self) then
 					local obj_pos = obj:get_pos()
-					if vector.distance(pos, obj_pos) > self.collisionbox[4] + self.reach then
+					if vec_dist(pos, obj_pos) > self.collisionbox[4] + self.reach then
 						mob_core.goto_next_waypoint(self, obj_pos)
 					else
 						mobkit.lq_turn2pos(self, obj_pos)
@@ -512,9 +534,13 @@ function paleotest.logic_play_with_post(self,prty)
 		local pos1 = {x=pos.x -self.view_range,y=pos.y-1,z=pos.z-self.view_range}
 		local pos2 = {x=pos.x +self.view_range,y=pos.y+1,z=pos.z+self.view_range}
 		local post = minetest.find_nodes_in_area(pos1,pos2,"paleotest:scratching_post")
-		if mobkit.is_queue_empty_low(self) and self.isonground and post[1] then
-			if vector.distance(pos,post[1]) > self.collisionbox[4]+1.5 then
-				mob_core.goto_next_waypoint(self,post[1])
+		if #post < 1 then return end
+		local go_to = find_closest_pos(pos, post)
+		if mobkit.is_queue_empty_low(self)
+		and self.isonground
+		and go_to then
+			if vec_dist(pos, go_to) > self.collisionbox[4]+1.5 then
+				mob_core.goto_next_waypoint(self, go_to)
 			else
 				mobkit.lq_idle(self, 1, "punch")
 				paleotest.particle_spawner(self.object:get_pos(), "heart.png", "float")
@@ -541,7 +567,7 @@ function paleotest.logic_flee_or_fight(self, prty) -- Attack specified mobs
         for i = 1, #self.predators do
             local predator = mobkit.get_closest_entity(self, self.predators[i])
             if predator
-            and vector.distance(self.object:get_pos(), predator:get_pos()) < self.view_range
+            and vec_dist(self.object:get_pos(), predator:get_pos()) < self.view_range
             and mobkit.is_alive(predator) then
                 if (self.tamed == true and predator:get_luaentity().owner ~= self.owner)
                 or not self.tamed then
@@ -551,4 +577,159 @@ function paleotest.logic_flee_or_fight(self, prty) -- Attack specified mobs
             end
         end
     end
+end
+
+------------------
+-- Aerial Mount --
+------------------
+
+function paleotest.hq_aerial_mount_logic(self, prty)
+    local forward_speed = minetest.registered_entities[self.name].max_speed_forward
+    local y = 0
+    local tvel = 0
+    local jump_meter = 0
+    local last_pos = {}
+    local mount_state = "ground"
+    local anim = "stand"
+    local timer = 0.25
+    local init = false
+    local func = function(self)
+        if not self.driver then return true end
+        if not init then
+            self.driver:set_attach(self.object, "Torso.2", self.driver_attach_at, self.player_rotation)
+        end
+        local pos = mobkit.get_stand_pos(self)
+
+        if timer <= 0 then
+            last_pos = pos
+            timer = 0.25
+        end
+
+        local ctrl = self.driver:get_player_control()
+        local tyaw = self.driver:get_look_horizontal() or 0
+        local yaw = self.object:get_yaw()
+        local cur_vel = self.object:get_velocity()
+
+        if math.abs(tyaw - yaw) > 0.1 then self.object:set_yaw(tyaw) end
+        local vel = vector.multiply(minetest.yaw_to_dir(yaw), tvel)
+        vel.y = y
+
+        self.object:set_velocity(vel)
+
+        if mount_state == "ground" then
+
+            -- Move Forward
+            if ctrl.up then
+                tvel = forward_speed/3
+            end
+
+            -- Jump
+            if ctrl.jump then
+                if self.isonground then
+                    y = (self.jump_height) + 4
+                end
+                jump_meter = jump_meter + self.dtime
+                if jump_meter > 0.5 then -- Takeoff
+                    y = 6
+                    mount_state = "flight"
+                end
+            else
+                jump_meter = 0
+                y = cur_vel.y
+            end
+
+            if tvel > 0 then
+                anim = "walk"
+            else
+                anim = "stand"
+            end
+        end
+
+        if mount_state == "flight" then
+
+            tvel = forward_speed
+
+            if ctrl.down then
+                y = -forward_speed
+                pos.y = pos.y - 1
+                timer = timer - self.dtime
+                if timer <= 0 and last_pos and last_pos.y == pos.y then
+                    mount_state = "ground"
+                end
+            elseif ctrl.jump then
+                y = forward_speed
+            elseif not ctrl.jump and not ctrl.down then
+                y = 0
+            end
+
+            if self.object:get_acceleration().y < 0 then
+                self.object:set_acceleration({x = 0, y = 0, z = 0}) -- Defy Gravity
+            end
+
+            anim = "fly"
+
+        end
+
+        mobkit.animate(self, anim)
+
+        -- Velocity Control
+
+        if mount_state == "ground"
+        and tvel ~= 0
+        and not ctrl.up then tvel = 0 end
+
+        if not ctrl.down and not ctrl.jump then
+            if mount_state == "ground" then
+                y = cur_vel.y
+            else
+                y = 0
+            end
+        end
+
+        if ctrl.sneak then
+            mobkit.clear_queue_low(self)
+            mobkit.clear_queue_high(self)
+            mob_core.detach(self.driver, {x = -1, y = 0, z = 0})
+        end
+    end
+    mobkit.queue_high(self, func, prty)
+end
+
+-------------------
+-- Aerial Follow --
+-------------------
+
+function paleotest.hq_aerial_follow(self, prty, target)
+    local center = self.object:get_pos()
+    local timer = 5
+    local func = function(self)
+        if not mobkit.is_alive(target) then
+            return true
+        end
+        if mobkit.is_queue_empty_low(self) and not self.isinliquid then
+            local pos = mobkit.get_stand_pos(self)
+            local pos2 = target:get_pos()
+            if vector.distance(pos, pos2) > 12 then
+                timer = timer - self.dtime
+            end
+            if timer <= 0
+            and vector.distance(pos, center) < 12 then
+                self.object:add_velocity({x = 0, y = 2, z = 0})
+            end
+            if self.isonground then
+                if pos2.y - pos.y > 4 then
+                    self.object:add_velocity({x = 0, y = 2, z = 0})
+                end
+                if vector.distance(pos, pos2) > 1.5*self.growth_stage then
+                    mob_core.goto_next_waypoint(self, pos2)
+                else
+                    mobkit.lq_idle(self, 1)
+                end
+            end
+            if not self.isonground then
+                mob_core.fly_to_next_waypoint(self, pos2)
+            end
+        end
+    end
+    mobkit.queue_high(self, func, prty)
 end
