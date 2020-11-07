@@ -150,6 +150,7 @@ minetest.register_entity("paleotest:pteranodon", {
     needs_enrichment = false,
     live_birth = false,
     max_hunger = 50,
+    aerial_follow = true,
     defend_owner = true,
     targets = {},
     follow = paleotest.global_fish,
@@ -218,6 +219,7 @@ minetest.register_entity("paleotest:pteranodon", {
                 temper = "Skittish"
             }))
         end
+        if self.mood > 50 then paleotest.set_order(self, clicker) end
         mob_core.protect(self, clicker, true)
         mob_core.nametag(self, clicker)
     end,
