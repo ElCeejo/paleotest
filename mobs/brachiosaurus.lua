@@ -67,21 +67,23 @@ local function brachiosaurus_logic(self)
             end
 
             if prty < 12 then
-                if self.attacks == "mobs" or self.attacks == "all" then
-                    table.insert(self.targets, self.name)
-                    mob_core.logic_attack_mobs(self, 12)
-                end
-                if self.mood < 25 then
-                    mob_core.logic_attack_mobs(self, 12)
-                end
-                if #self.predators > 0 then
-                    mob_core.logic_attack_mobs(self, 12, self.predators)
+                if not self.child then
+                    if self.attacks == "mobs" or self.attacks == "all" then
+                        table.insert(self.targets, self.name)
+                        mob_core.logic_attack_mobs(self, 12)
+                    end
+                    if self.mood < 25 then
+                        mob_core.logic_attack_mobs(self, 12)
+                    end
+                    if #self.predators > 0 then
+                        mob_core.logic_attack_mobs(self, 12, self.predators)
+                    end
                 end
             end
 
             if prty < 10 then
-                if player then
-                    if self.child then return end
+                if player
+                and not self.child then
                     if self.mood < 25 then
                         mob_core.logic_attack_player(self, 10, player)
                     end

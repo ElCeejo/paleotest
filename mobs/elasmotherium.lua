@@ -60,7 +60,6 @@ local function elasmotherium_logic(self)
         end
 
         if prty < 14 then
-            if self.status == "sleeping" then return end
             if self.hunger < self.max_hunger and self.feeder_timer == 1 then
                 if math.random(1, 2) == 1 then
                     paleotest.hq_go_to_feeder(self, 14,
@@ -72,7 +71,6 @@ local function elasmotherium_logic(self)
         end
 
         if prty < 12 then
-            if self.status == "sleeping" then return end
             if self.attacks == "mobs" or self.attacks == "all" then
                 table.insert(self.targets, self.name)
                 mob_core.logic_attack_mobs(self, 10)
@@ -86,9 +84,8 @@ local function elasmotherium_logic(self)
         end
 
         if prty < 10 then
-            if self.status == "sleeping" then return end
-            if player then
-                if self.child then return end
+            if player
+            and not self.child then
                 if self.mood < 65 then
                     mob_core.logic_attack_player(self, 8, player)
                 end
@@ -96,18 +93,16 @@ local function elasmotherium_logic(self)
         end
 
         if prty < 8 then
-            if self.status == "sleeping" then return end
             if self.mood > 75 then
                 mob_core.hq_follow_holding(self, 8, player)
             end
         end
 
         if prty < 6 then
-            if self.status == "sleeping" then return end
             if math.random(1, self.mood) == 1 then
-                if math.random(1, 2) == 1 then
+                if paleotest.can_find_post(self) then
                     paleotest.logic_play_with_post(self, 6)
-                else
+                elseif paleotest.can_find_ball(self) then
                     paleotest.logic_play_with_ball(self, 6)
                 end
             end
