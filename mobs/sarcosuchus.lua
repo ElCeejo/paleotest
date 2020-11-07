@@ -82,34 +82,35 @@ local function sarcosuchus_logic(self)
         end
 
         if prty < 10 then
-            if self.child then return end
-            if self.attacks == "mobs" or self.attacks == "all" then
-                table.insert(self.targets, self.name)
-                if self.is_in_deep then
-                    mob_core.logic_aqua_attack_mob(self, 10)
-                else
-                    mob_core.logic_attack_mobs(self, 10)
+            if not self.child then
+                if self.attacks == "mobs" or self.attacks == "all" then
+                    table.insert(self.targets, self.name)
+                    if self.is_in_deep then
+                        mob_core.logic_aqua_attack_mob(self, 10)
+                    else
+                        mob_core.logic_attack_mobs(self, 10)
+                    end
                 end
-            end
-            if self.mood < 50 then
-                if self.is_in_deep then
-                    mob_core.logic_aqua_attack_mob(self, 10)
-                else
-                    mob_core.logic_attack_mobs(self, 10)
+                if self.mood < 50 then
+                    if self.is_in_deep then
+                        mob_core.logic_aqua_attack_mob(self, 10)
+                    else
+                        mob_core.logic_attack_mobs(self, 10)
+                    end
                 end
-            end
-            if #self.rivals >= 1 then
-                if self.is_in_deep then
-                    mob_core.logic_aqua_attack_mob(self, 10, self.rivals)
-                else
-                    mob_core.logic_attack_mobs(self, 10, self.rivals)
+                if #self.rivals >= 1 then
+                    if self.is_in_deep then
+                        mob_core.logic_aqua_attack_mob(self, 10, self.rivals)
+                    else
+                        mob_core.logic_attack_mobs(self, 10, self.rivals)
+                    end
                 end
             end
         end
 
         if prty < 8 then
-            if player then
-                if self.child then return end
+            if player
+            and not self.child then
                 if self.mood < 50 and player:get_player_name() ~= self.owner then
                     if self.is_in_deep then
                         mob_core.logic_aqua_attack_player(self, 8, player)

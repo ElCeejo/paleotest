@@ -99,65 +99,63 @@ local function dire_wolf_logic(self)
             mob_core.logic_attack_mob(self, 16, self.owner_target)
         end
 
-        if prty < 14 then
-            if self.hunger < self.max_hunger and self.feeder_timer == 1 then
-                if math.random(1, 2) == 1 then
-                    paleotest.hq_go_to_feeder(self, 14,
-                                              "paleotest:feeder_carnivore")
-                else
-                    paleotest.hq_eat_items(self, 14)
-                end
-            end
-        end
+        if self.status ~= "sleeping" then
 
-        if prty < 12 then
-            if self.status == "sleeping" then return end
-            if not self.child then
-                if self.attacks == "mobs" or self.attacks == "all" then
-                    table.insert(self.targets, self.name)
-                    if self.pack_size > self.total_predators then
-                        mob_core.logic_attack_mobs(self, 12)
-                    elseif self.pack_size <= self.total_predators then
-                        mob_core.logic_runaway_mob(self, 12, self.predators)
-                        return
-                    end
-                end
-                if self.mood < 50 or not self.tamed then
-                    if self.pack_size > self.total_predators then
-                        mob_core.logic_attack_mobs(self, 12)
-                    elseif self.pack_size <= self.total_predators then
-                        mob_core.logic_runaway_mob(self, 12, self.predators)
-                        return
+            if prty < 14 then
+                if self.hunger < self.max_hunger and self.feeder_timer == 1 then
+                    if math.random(1, 2) == 1 then
+                        paleotest.hq_go_to_feeder(self, 14,
+                                                  "paleotest:feeder_carnivore")
+                    else
+                        paleotest.hq_eat_items(self, 14)
                     end
                 end
             end
-        end
 
-        if prty < 10 then
-            if self.status == "sleeping" then return end
-            if player and not self.child then
-                if self.mood > 50 and player:get_player_name() ~= self.owner then
-                    mob_core.logic_attack_player(self, 10, player)
-                elseif self.mood < 50 then
-                    mob_core.logic_attack_player(self, 10, player)
+            if prty < 12 then
+                if self.status == "sleeping" then return end
+                if not self.child then
+                    if self.attacks == "mobs" or self.attacks == "all" then
+                        table.insert(self.targets, self.name)
+                        if self.pack_size > self.total_predators then
+                            mob_core.logic_attack_mobs(self, 12)
+                        elseif self.pack_size <= self.total_predators then
+                            mob_core.logic_runaway_mob(self, 12, self.predators)
+                        end
+                    end
+                    if self.mood < 50 or not self.tamed then
+                        if self.pack_size > self.total_predators then
+                            mob_core.logic_attack_mobs(self, 12)
+                        elseif self.pack_size <= self.total_predators then
+                            mob_core.logic_runaway_mob(self, 12, self.predators)
+                        end
+                    end
                 end
             end
-        end
 
-        if prty < 8 then
-            if self.status == "sleeping" then return end
-            if self.mood > 50 then
-                mob_core.hq_follow_holding(self, 8, player)
+            if prty < 10 then
+                if player and not self.child then
+                    if self.mood > 50 and player:get_player_name() ~= self.owner then
+                        mob_core.logic_attack_player(self, 10, player)
+                    elseif self.mood < 50 then
+                        mob_core.logic_attack_player(self, 10, player)
+                    end
+                end
             end
-        end
-
-        if prty < 6 then
-            if self.status == "sleeping" then return end
-            if math.random(1, self.mood) == 1 then
-                if math.random(1, 2) == 1 then
-                    paleotest.logic_play_with_post(self, 6)
-                else
-                    paleotest.logic_play_with_ball(self, 6)
+    
+            if prty < 8 then
+                if self.mood > 50 then
+                    mob_core.hq_follow_holding(self, 8, player)
+                end
+            end
+    
+            if prty < 6 then
+                if math.random(1, self.mood) == 1 then
+                    if math.random(1, 2) == 1 then
+                        paleotest.logic_play_with_post(self, 6)
+                    else
+                        paleotest.logic_play_with_ball(self, 6)
+                    end
                 end
             end
         end

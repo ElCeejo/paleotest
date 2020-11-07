@@ -57,6 +57,8 @@ local function smilodon_logic(self)
             mob_core.logic_attack_mob(self, 16, self.owner_target)
         end
 
+        if self.status ~= "sleeping" then
+            
         if prty < 14 then
             if self.hunger < self.max_hunger and self.feeder_timer == 1 then
                 if math.random(1, 2) == 1 then
@@ -69,8 +71,8 @@ local function smilodon_logic(self)
         end
 
         if prty < 12 then
-            if self.status == "sleeping" then return end
-            if player and not self.child then
+            if player
+            and not self.child then
                 if self.attacks == "mobs" or self.attacks == "all" then
                     table.insert(self.targets, self.name)
                     mob_core.logic_attack_mobs(self, 12)
@@ -82,11 +84,10 @@ local function smilodon_logic(self)
         end
 
         if prty < 10 then
-            if self.status == "sleeping" then return end
-            if player then
-                if self.child then return end
-                if (self.attacks == "players" or self.attacks == "all") and
-                    player:get_player_name() ~= self.owner then
+            if player
+            and not self.child then
+                if (self.attacks == "players" or self.attacks == "all")
+                and player:get_player_name() ~= self.owner then
                     mob_core.logic_attack_player(self, 10, player)
                 end
                 if self.mood > 50 and player:get_player_name() ~= self.owner then
@@ -98,14 +99,12 @@ local function smilodon_logic(self)
         end
 
         if prty < 8 then
-            if self.status == "sleeping" then return end
             if self.mood > 50 then
                 mob_core.hq_follow_holding(self, 8, player)
             end
         end
 
         if prty < 6 then
-            if self.status == "sleeping" then return end
             if math.random(1, self.mood) == 1 then
                 if paleotest.can_find_post(self) then
                     paleotest.logic_play_with_post(self, 6)
@@ -114,6 +113,7 @@ local function smilodon_logic(self)
                 end
             end
         end
+    end
 
         if prty < 2 then
             if self.sleep_timer <= 0 and self.status ~= "following" then
