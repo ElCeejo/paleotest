@@ -142,9 +142,9 @@ function paleotest.register_feeder(name, def)
                 local stack = inv:get_stack("items", i)
                 local item = stack:get_name()
                 local count = stack:get_count()
-                minetest.add_item(pos, name)
                 minetest.add_item(pos, item .. " " .. count)
             end
+            minetest.add_item(pos, name)
             minetest.remove_node(pos)
         end
     })
@@ -179,7 +179,7 @@ paleotest.register_feeder("paleotest:feeder_piscivore", {
 paleotest.register_feeder("paleotest:feeder_herbivore", {
     description = "Herbivore Feeder",
     tiles = {
-        "paleotest_feeder_piscivore_top.png",
+        "paleotest_feeder_herbivore_top.png",
         "paleotest_fossil_analyzer_bottom.png",
         "paleotest_fossil_analyzer_side.png",
         "paleotest_fossil_analyzer_side.png",
