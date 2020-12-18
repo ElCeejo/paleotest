@@ -104,8 +104,10 @@ function paleotest.register_feeder(name, def)
             local size = inv:get_size("items")
             local stack = inv:get_stack("items", 1)
             while stack:get_count() <= 0 do
-                for i = size, 2, -1 do
-                    inv:set_stack(i, inv:get_stack(i - 1))
+                if size > 1 then
+                    for i = size, 2, -1 do
+                        inv:set_stack(i, stack:get_count(i - 1))
+                    end
                 end
             end
             if stack:get_count() - take >= 0 then
