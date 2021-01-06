@@ -147,4 +147,8 @@ dofile(path.."/mobs/procoptodon.lua")
 dofile(path.."/mobs/smilodon.lua")
 dofile(path.."/mobs/thylacoleo.lua")
 
+if minetest.settings:get_bool('spawning') then
+	dofile(path.."/spawning.lua")
+end
+
 minetest.log("action", "[MOD] PaleoTest v2.0 Dev loaded")
