@@ -1,24 +1,24 @@
 local mob_list = {
     -- create item for every mob with fine tuned settings here
-    brachiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass','default:river_water_source'}},
-    carnotaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    dire_wolf = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass','default:dirt_with_rainforest_litter'}},
-    dunkleosteus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', 'taiga_ocean'}, near = {'default:water_source'}},
-    elasmotherium = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet', 'taiga'}, near = {'default:dirt_with_grass'}}, --unicorn!
-    mammoth = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet', 'taiga'}, near = {'default:dirt_with_grass','default:snowblock','default:ice','default:dirt_with_snow','default:permafrost_with_stones'}},
-    mosasaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', 'taiga_ocean'}, near = {'default:water_source'}},
-    plesiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', taiga_ocean}, near = {'default:water_source'}},
-    procoptodon = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    pteranodon = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    quetzalcoatlus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    sarcosuchus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:river_water_source','default:sand'}},
-    smilodon = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet', 'taiga'}, near = {'default:dirt_with_grass'}},
-    spinosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    stegosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    thylacoleo = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    triceratops = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    tyrannosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass'}},
-    velociraptor = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {''}, near = {'default:dirt_with_grass','default:dirt_with_dry_grass','default:dry_dirt_with_dry_grass','default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
+    brachiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland', 'grassland_dunes', 'deciduous_forest_shore'}, near = {'default:dirt_with_grass','default:river_water_source'}},
+    carnotaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland'}, near = {'default:dirt_with_grass'}},
+    dire_wolf = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'snowy_grassland', 'coniferous_forest', 'deciduous_forest'}, near = {'default:dirt_with_grass','default:dirt_with_rainforest_litter'}},
+    dunkleosteus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', 'taiga_ocean', 'snowy_grassland_ocean', 'grassland_ocean', 'coniferous_forest_ocean', 'deciduous_forest_ocean', 'desert_ocean'}, near = {'default:water_source'}},
+    elasmotherium = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet', 'taiga', 'snowy_grassland'}, near = {'default:dirt_with_grass'}}, --unicorn!
+    mammoth = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet', 'taiga', 'snowy_grassland'}, near = {'default:dirt_with_grass','default:snowblock','default:ice','default:dirt_with_snow','default:permafrost_with_stones'}},
+    mosasaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', 'taiga_ocean', 'snowy_grassland_ocean', 'grassland_ocean', 'coniferous_forest_ocean', 'deciduous_forest_ocean', 'desert_ocean'}, near = {'default:water_source'}},
+    plesiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', 'taiga_ocean', 'snowy_grassland_ocean', 'grassland_ocean', 'coniferous_forest_ocean', 'deciduous_forest_ocean', 'desert_ocean'}, near = {'default:water_source'}},
+    procoptodon = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland'}, near = {'default:dirt_with_grass'}},
+    pteranodon = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'tundra_highland'}, near = {'default:dirt_with_grass'}},
+    quetzalcoatlus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'tundra_highland'}, near = {'default:dirt_with_grass'}},
+    sarcosuchus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland_dunes', 'coniferous_forest_dunes', 'deciduous_forest_shore'}, near = {'default:river_water_source','default:sand'}},
+    smilodon = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet', 'taiga', 'snowy_grassland'}, near = {'default:dirt_with_grass'}},
+    spinosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'snowy_grassland'}, near = {'default:dirt_with_grass'}},
+    stegosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland'}, near = {'default:dirt_with_grass'}},
+    thylacoleo = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'snowy_grassland'}, near = {'default:dirt_with_grass'}},
+    triceratops = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland'}, near = {'default:dirt_with_grass'}},
+    tyrannosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland'}, near = {'default:dirt_with_grass'}},
+    velociraptor = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'coniferous_forest', 'deciduous_forest'}, near = {'default:dirt_with_grass','default:dirt_with_dry_grass','default:dry_dirt_with_dry_grass','default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
 }
 -- after defining these mobs, we can add mod dependant materials to the near array like this:
 if minetest.get_modpath('ethereal') then
