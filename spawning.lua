@@ -24,7 +24,7 @@ for biome, entry in ipairs(allbiomes) do
 end
 local mob_list = {
     -- create item for every mob with fine tuned settings here
-    brachiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {unpack(shoresbiomes), table.unpack(otherbiomes)}, near = {'default:dirt_with_grass','default:river_water_source'}},
+    brachiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {unpack(shoresbiomes), unpack(otherbiomes)}, near = {'default:dirt_with_grass','default:river_water_source'}},
     carnotaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
     dire_wolf = {intrvl = 25, chance = 0.5, reduction = 0, biomes = forestbiomes, near = {'default:dirt_with_grass','default:dirt_with_rainforest_litter'}},
     dunkleosteus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = oceanbiomes, near = {'default:water_source'}},
