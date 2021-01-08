@@ -74,7 +74,7 @@ for mob, def in ipairs(mob_list) do
             for i, biome_name in ipair(def.biomes) do
                 allowed_biomes[i] = minetest.get_biome_id(biome_name)
             end
-            if has_value(allowed_biomes, biome.id)
+            if has_value(allowed_biomes, biome.id) then
                 minetest.add_entity(spawnpos, "paleotest:"..mob)
             end
         end
