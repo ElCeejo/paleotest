@@ -6,10 +6,12 @@ local otherbiomes = {}
 for biome, entry in ipairs(allbiomes) do
     if string.find(biome, 'ocean') then
         table.insert(oceanbiomes, biome)
-    elseif string.find(biome, '(shore|dunes)') then
+    elseif string.find(biome, 'shore') or string.find(biome, 'dune') then
         table.insert(shorebiomes, biome)
     elseif string.find(biome, 'forest') then
         table.insert(forestbiomes, biome)
+    elseif string.find(biome, 'under') then
+        -- skip, no mobs spawn here
     else
         table.insert(otherbiomes)
     end
