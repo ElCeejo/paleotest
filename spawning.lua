@@ -1,13 +1,29 @@
+local allbiomes = minetest.registered_biomes
+local oceanbiomes = {}
+local shorebiomes = {}
+local forestbiomes = {}
+local otherbiomes = {}
+for biome, entry in ipairs(allbiomes) do
+    if string.find(biome, 'ocean') then
+        table.insert(oceanbiomes, biome)
+    elseif string.find(biome, '(shore|dunes)') then
+        table.insert(shorebiomes, biome)
+    elseif string.find(biome, 'forest') then
+        table.insert(forestbiomes, biome)
+    else
+        table.insert(otherbiomes)
+    end
+end
 local mob_list = {
     -- create item for every mob with fine tuned settings here
     brachiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland', 'grassland_dunes', 'deciduous_forest_shore'}, near = {'default:dirt_with_grass','default:river_water_source'}},
     carnotaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland'}, near = {'default:dirt_with_grass'}},
     dire_wolf = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'snowy_grassland', 'coniferous_forest', 'deciduous_forest'}, near = {'default:dirt_with_grass','default:dirt_with_rainforest_litter'}},
-    dunkleosteus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', 'taiga_ocean', 'snowy_grassland_ocean', 'grassland_ocean', 'coniferous_forest_ocean', 'deciduous_forest_ocean', 'desert_ocean'}, near = {'default:water_source'}},
+    dunkleosteus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = oceanbiomes, near = {'default:water_source'}},
     elasmotherium = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet', 'taiga', 'snowy_grassland'}, near = {'default:dirt_with_grass'}}, --unicorn!
     mammoth = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet', 'taiga', 'snowy_grassland'}, near = {'default:dirt_with_grass','default:snowblock','default:ice','default:dirt_with_snow','default:permafrost_with_stones'}},
-    mosasaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', 'taiga_ocean', 'snowy_grassland_ocean', 'grassland_ocean', 'coniferous_forest_ocean', 'deciduous_forest_ocean', 'desert_ocean'}, near = {'default:water_source'}},
-    plesiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'icesheet_ocean', 'tundra_ocean', 'taiga_ocean', 'snowy_grassland_ocean', 'grassland_ocean', 'coniferous_forest_ocean', 'deciduous_forest_ocean', 'desert_ocean'}, near = {'default:water_source'}},
+    mosasaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = oceanbiomes, near = {'default:water_source'}},
+    plesiosaurus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = oceanbiomes, near = {'default:water_source'}},
     procoptodon = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'grassland'}, near = {'default:dirt_with_grass'}},
     pteranodon = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'tundra_highland'}, near = {'default:dirt_with_grass'}},
     quetzalcoatlus = {intrvl = 25, chance = 0.5, reduction = 0, biomes = {'tundra_highland'}, near = {'default:dirt_with_grass'}},
