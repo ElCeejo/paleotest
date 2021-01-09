@@ -1,4 +1,4 @@
-minetest.register_on_mods_loaded(function()
+minetest.register_on_mapgen_init(function()
     local allbiomes = minetest.registered_biomes
     local oceanbiomes = {}
     local shoresbiomes = {}
