@@ -7,7 +7,7 @@ minetest.register_on_mods_loaded(function()
     local desertbiomes = {}
     local highlandbiomes = {}
     for biome, entry in ipairs(allbiomes) do
-        minetest.log('info', '[paleotest] Discovered biome named '..biome)
+        minetest.log('action', '[paleotest] Discovered biome named '..biome)
         if string.find(biome, 'ocean') then
             table.insert(oceanbiomes, biome)
         elseif string.find(biome, 'shore') or string.find(biome, 'dune') then
