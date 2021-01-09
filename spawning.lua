@@ -6,8 +6,9 @@ minetest.register_on_mapgen_init(function()
     local otherbiomes = {}
     local desertbiomes = {}
     local highlandbiomes = {}
+    minetest.log("action", "[MOD] PaleoTest found these biomes"..unpack(allbiomes))
     for biome, entry in ipairs(allbiomes) do
-        minetest.log('action', '[paleotest] Discovered biome named '..biome)
+        -- minetest.log('action', '[paleotest] Discovered biome named '..biome)
         if string.find(biome, 'ocean') then
             table.insert(oceanbiomes, biome)
         elseif string.find(biome, 'shore') or string.find(biome, 'dune') then
