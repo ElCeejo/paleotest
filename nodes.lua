@@ -448,7 +448,7 @@ minetest.register_node("paleotest:metasequoia_leaves", {
     },
     sounds = default.node_sound_leaves_defaults(),
 
-    after_place_node = after_place_leaves
+    after_place_node = default.after_place_leaves
 })
 
 local function grow_sapling(pos)
