@@ -1,3 +1,4 @@
+minetest.register_on_mods_loaded(function()
 local allbiomes = minetest.registered_biomes
 local oceanbiomes = {}
 local shoresbiomes = {}
@@ -80,3 +81,4 @@ for mob, def in ipairs(mob_list) do
         end
     end)
 end
+end)
