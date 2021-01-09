@@ -1,14 +1,14 @@
 minetest.register_on_mapgen_init(function()
-    local allbiomes = minetest.registered_biomes
+    local allbiomes = {}
     local oceanbiomes = {}
     local shoresbiomes = {}
     local forestbiomes = {}
     local otherbiomes = {}
     local desertbiomes = {}
     local highlandbiomes = {}
-    minetest.log("action", "[MOD] PaleoTest found these biomes"..unpack(allbiomes))
-    for biome, entry in ipairs(allbiomes) do
+    for biome, entry in ipairs(minetest.registered_biomes) do
         -- minetest.log('action', '[paleotest] Discovered biome named '..biome)
+        table.insert(allbiomes, biome)
         if string.find(biome, 'ocean') then
             table.insert(oceanbiomes, biome)
         elseif string.find(biome, 'shore') or string.find(biome, 'dune') then
@@ -25,6 +25,7 @@ minetest.register_on_mapgen_init(function()
             table.insert(otherbiomes)
         end
     end
+    minetest.log("action", "[MOD] PaleoTest found these biomes"..unpack(allbiomes))
     local mob_list = {
         -- create item for every mob with fine tuned settings here
         brachiosaurus = {intrvl = 1, chance = 0.5, reduction = 0, biomes = {unpack(shoresbiomes), unpack(otherbiomes)}, near = {'default:dirt_with_grass','default:river_water_source'}},
