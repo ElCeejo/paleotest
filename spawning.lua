@@ -68,7 +68,7 @@ minetest.register_on_mapgen_init(function()
         minetest.register_globalstep(function(dtime)
             spawn_timer = spawn_timer + dtime
             if spawn_timer > def.intrvl then
-                if random(1, def.chance) == 1 then
+                if math.random(1, def.chance) == 1 then
                     -- local pos = mobkit.get_spawn_pos_abr(1, 1, 1, 1, 0)
                     -- local pos1 = {x=pos.x + 32, y=pos.y + 32, z=pos.z + 32}
                     -- local pos2 = {x=pos.x - 32, y=pos.y - 32, z=pos.z - 32}
