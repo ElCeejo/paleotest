@@ -33,14 +33,14 @@ minetest.register_on_mapgen_init(function()
         dire_wolf = {intrvl = 1, chance = 0.4, group = 10, biomes = forestbiomes, near = {'default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
         dunkleosteus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'group:water'}},
         elasmotherium = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}}, --unicorn!
-        mammoth = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil', 'group:sand','group:snowy','default:ice','default:permafrost_with_stones'}},
+        mammoth = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil','group:snowy','default:ice','default:permafrost_with_stones'}},
         mosasaurus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'group:water'}},
         plesiosaurus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'group:water'}},
         procoptodon = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
-        pteranodon = {intrvl = 5, chance = 0.5, biomes = highlandbiomes, near = {'group:soil'}},
-        quetzalcoatlus = {intrvl = 5, chance = 0.5, biomes = highlandbiomes, near = {'group:soil'}},
+        pteranodon = {intrvl = 5, chance = 0.5, biomes = highlandbiomes, near = {'group:soil', 'default:permafrost_with_stones'}},
+        quetzalcoatlus = {intrvl = 5, chance = 0.5, biomes = highlandbiomes, near = {'group:soil', 'default:permafrost_with_stones'}},
         sarcosuchus = {intrvl = 5, chance = 0.5, biomes = shoresbiomes, near = {'group:water','group:sand'}},
-        smilodon = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
+        smilodon = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil', 'group:snowy', 'default:ice', 'default:permafrost_with_stones'}},
         spinosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
         stegosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
         thylacoleo = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
@@ -48,7 +48,7 @@ minetest.register_on_mapgen_init(function()
         tyrannosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
         velociraptor = {intrvl = 1, chance = 0.4, group = 10, biomes = forestbiomes, near = {'default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
     }
-    -- after defining these mobs, we can add mod dependant materials to the near array like this:
+    -- after defining these mobs, we can add mod dependant stuff to the near array like this:
     -- if minetest.get_modpath('ethereal') then
         -- table.insert(mob_list.tyrannosaurus.biomes, 'mushroom')
     -- end
