@@ -14,4 +14,4 @@ spawning (Allow Mobs to Spawn in the Wild) bool false
 spawn_rate (Spawn Rate Multiplier) float 1.0
 
 #    Adjust chance of mobs spawning. Number (can be decimal) ranging from 0 to 2
-spawn_chance (Spawn Chance Multiplier) float 1.0
+spawn_chance (Spawn Chance Multiplier) float 1.0 0.0 2.0
