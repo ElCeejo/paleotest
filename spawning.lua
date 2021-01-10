@@ -73,7 +73,7 @@ minetest.register_on_mapgen_init(function()
                     -- local pos1 = {x=pos.x + 32, y=pos.y + 32, z=pos.z + 32}
                     -- local pos2 = {x=pos.x - 32, y=pos.y - 32, z=pos.z - 32}
                     -- local nodes = minetest.find_nodes_in_area_under_air(pos1, pos2, nodenames)
-                    mob_core.spawn("paleotest:"..mob, {"group:soil", "group:stone"}, 0, minetest.MAXLIGHT, -31000, 31000, 24, 256, def.group or 1, {biomes = def.biomes})
+                    mob_core.spawn("paleotest:"..mob, {"group:soil", "group:stone"}, 0, minetest.LIGHT_MAX, -31000, 31000, 24, 256, def.group or 1, {biomes = def.biomes})
                 end
                 spawn_timer = 0
             end
