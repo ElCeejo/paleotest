@@ -1,6 +1,6 @@
+paleotest.spawn_rate = minetest.settings:get('spawn_rate')
+paleotest.spawn_chance = minetest.settings:get('spawn_chance') -- decimal value ranging from 0 to 2
 minetest.register_on_mapgen_init(function()
-    local spawn_rate = minetest.settings:get('spawn_rate')
-    local spawn_chance = minetest.settings:get('spawn_chance') -- decimal value ranging from 0 to 2
     local allbiomes = {}
     local oceanbiomes = {}
     local shoresbiomes = {}
@@ -62,8 +62,8 @@ minetest.register_on_mapgen_init(function()
         local spawn_timer = 0
         minetest.register_globalstep(function(dtime)
             spawn_timer = spawn_timer + dtime
-            if spawn_timer > (def.intrvl * spawn_rate) then
-                if math.random(1, def.chance * spawn_chance) == 1 then
+            if spawn_timer > (def.intrvl * paleotest.spawn_rate) then
+                if math.random(1, def.chance * paleotest.spawn_chance) == 1 then
                     mob_core.spawn("paleotest:"..mob, def.nodes or {"group:soil", "group:stone"}, 0, minetest.LIGHT_MAX, -31000, 31000, 24, 256, def.group or 1, {biomes = def.biomes})
                 end
                 spawn_timer = 0
