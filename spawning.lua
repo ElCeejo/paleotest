@@ -28,25 +28,25 @@ minetest.register_on_mapgen_init(function()
     -- minetest.log("debug", "[MOD] PaleoTest found these "..table.getn(allbiomes).." biomes "..dump(allbiomes))
     local mob_list = {
         -- create item for every mob with fine tuned settings here
-        brachiosaurus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = {unpack(shoresbiomes), unpack(otherbiomes)}, near = {'default:dirt_with_grass','default:river_water_source'}},
-        carnotaurus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        dire_wolf = {intrvl = 5, chance = 0.4, reduction = 0, biomes = forestbiomes, near = {'default:dirt_with_grass','default:dirt_with_rainforest_litter'}},
-        dunkleosteus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = oceanbiomes, near = {'default:water_source'}},
-        elasmotherium = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}}, --unicorn!
-        mammoth = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass','default:snowblock','default:ice','default:dirt_with_snow','default:permafrost_with_stones'}},
-        mosasaurus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = oceanbiomes, near = {'default:water_source'}},
-        plesiosaurus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = oceanbiomes, near = {'default:water_source'}},
-        procoptodon = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        pteranodon = {intrvl = 50, chance = 0.5, reduction = 0, biomes = highlandbiomes, near = {'default:dirt_with_grass'}},
-        quetzalcoatlus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = highlandbiomes, near = {'default:dirt_with_grass'}},
-        sarcosuchus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = shoresbiomes, near = {'default:river_water_source','default:sand'}},
-        smilodon = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        spinosaurus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        stegosaurus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        thylacoleo = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        triceratops = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        tyrannosaurus = {intrvl = 50, chance = 0.5, reduction = 0, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        velociraptor = {intrvl = 5, chance = 0.4, reduction = 0, biomes = forestbiomes, near = {'default:dirt_with_grass','default:dirt_with_dry_grass','default:dry_dirt_with_dry_grass','default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
+        brachiosaurus = {intrvl = 50, chance = 0.5, biomes = {unpack(shoresbiomes), unpack(otherbiomes)}, near = {'default:dirt_with_grass','default:river_water_source'}},
+        carnotaurus = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        dire_wolf = {intrvl = 5, chance = 0.4, group = 10, biomes = forestbiomes, near = {'default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
+        dunkleosteus = {intrvl = 50, chance = 0.5, biomes = oceanbiomes, near = {'default:water_source'}},
+        elasmotherium = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}}, --unicorn!
+        mammoth = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass','default:snowblock','default:ice','default:dirt_with_snow','default:permafrost_with_stones'}},
+        mosasaurus = {intrvl = 50, chance = 0.5, biomes = oceanbiomes, near = {'default:water_source'}},
+        plesiosaurus = {intrvl = 50, chance = 0.5, biomes = oceanbiomes, near = {'default:water_source'}},
+        procoptodon = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        pteranodon = {intrvl = 50, chance = 0.5, biomes = highlandbiomes, near = {'default:dirt_with_grass'}},
+        quetzalcoatlus = {intrvl = 50, chance = 0.5, biomes = highlandbiomes, near = {'default:dirt_with_grass'}},
+        sarcosuchus = {intrvl = 50, chance = 0.5, biomes = shoresbiomes, near = {'default:river_water_source','default:sand'}},
+        smilodon = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        spinosaurus = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        stegosaurus = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        thylacoleo = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        triceratops = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        tyrannosaurus = {intrvl = 50, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        velociraptor = {intrvl = 5, chance = 0.4, group = 10, biomes = forestbiomes, near = {'default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
     }
     -- after defining these mobs, we can add mod dependant materials to the near array like this:
     -- if minetest.get_modpath('ethereal') then
@@ -62,22 +62,23 @@ minetest.register_on_mapgen_init(function()
 
         return false
     end
+    -- local radius = 32
     for mob, def in pairs(mob_list) do
         local spawn_timer = 0
         minetest.register_globalstep(function(dtime)
             spawn_timer = spawn_timer + dtime
             if spawn_timer > def.intrvl then
                 if random(1, def.chance) == 1 then
-                    local pos = mobkit.get_spawn_pos_abr(1, 1, 1, 1, 0)
-                    local pos1 = {x=pos.x, y=pos.y, z=pos.z}
-                    local pos2 = {x=pos.x, y=pos.y, z=pos.z}
-                    local nodes = minetest.find_nodes_in_area_under_air(pos1, pos2, nodenames)
-                    mob_core.spawn("paleotest:"..mob, def.nodes or {"group:soil", "group:stone"}, 0, 15, -31000, 31000, 24, 256, 1)
+                    -- local pos = mobkit.get_spawn_pos_abr(1, 1, 1, 1, 0)
+                    -- local pos1 = {x=pos.x + 32, y=pos.y + 32, z=pos.z + 32}
+                    -- local pos2 = {x=pos.x - 32, y=pos.y - 32, z=pos.z - 32}
+                    -- local nodes = minetest.find_nodes_in_area_under_air(pos1, pos2, nodenames)
+                    mob_core.spawn("paleotest:"..mob, {"group:soil", "group:stone"}, 0, minetest.MAXLIGHT, -31000, 31000, 24, 256, def.group or 1, {biomes = def.biomes})
                 end
                 spawn_timer = 0
             end
         end)
-        mob_core.register_spawn({name = "paleotest:"..mob, nodes = def.near}, def.intrvl, def.chance)
+        -- mob_core.register_spawn({name = "paleotest:"..mob, nodes = def.near}, def.intrvl, def.chance)
     end
 
     -- local radius = 32 -- I expect the radius to be the same for every mob, if not we can add it as an item in the mob definitions array above, which would be accessed below as def.radius
