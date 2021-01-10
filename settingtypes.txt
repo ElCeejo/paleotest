@@ -11,7 +11,7 @@ legacy_convert (1.x to 2.0+ Conversion) bool true
 spawning (Allow Mobs to Spawn in the Wild) bool false
 
 #    Adjusts spawn rate of mobs
-spawn_rate (Spawn Rate Multiplier) int 1
+spawn_rate (Spawn Rate Multiplier) float 1
 
 #    Adjust chance of mobs spawning. Number (can be decimal) ranging from 0 to 2
-spawn_chance (Spawn Chance Multiplier) int 1
+spawn_chance (Spawn Chance Multiplier) float 1
