@@ -28,24 +28,24 @@ minetest.register_on_mapgen_init(function()
     -- minetest.log("debug", "[MOD] PaleoTest found these "..table.getn(allbiomes).." biomes "..dump(allbiomes))
     local mob_list = {
         -- create item for every mob with fine tuned settings here
-        brachiosaurus = {intrvl = 5, chance = 0.5, biomes = {unpack(shoresbiomes), unpack(otherbiomes)}, near = {'default:dirt_with_grass','default:river_water_source'}},
-        carnotaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        brachiosaurus = {intrvl = 5, chance = 0.5, biomes = {unpack(shoresbiomes), unpack(otherbiomes)}, near = {'group:soil','group:water'}},
+        carnotaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
         dire_wolf = {intrvl = 1, chance = 0.4, group = 10, biomes = forestbiomes, near = {'default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
-        dunkleosteus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'default:water_source'}},
-        elasmotherium = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}}, --unicorn!
-        mammoth = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass','default:snowblock','default:ice','default:dirt_with_snow','default:permafrost_with_stones'}},
-        mosasaurus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'default:water_source'}},
-        plesiosaurus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'default:water_source'}},
-        procoptodon = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        pteranodon = {intrvl = 5, chance = 0.5, biomes = highlandbiomes, near = {'default:dirt_with_grass'}},
-        quetzalcoatlus = {intrvl = 5, chance = 0.5, biomes = highlandbiomes, near = {'default:dirt_with_grass'}},
-        sarcosuchus = {intrvl = 5, chance = 0.5, biomes = shoresbiomes, near = {'default:river_water_source','default:sand'}},
-        smilodon = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        spinosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        stegosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        thylacoleo = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        triceratops = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
-        tyrannosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'default:dirt_with_grass'}},
+        dunkleosteus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'group:water'}},
+        elasmotherium = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}}, --unicorn!
+        mammoth = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil', 'group:sand','group:snowy','default:ice','default:permafrost_with_stones'}},
+        mosasaurus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'group:water'}},
+        plesiosaurus = {intrvl = 5, chance = 0.5, biomes = oceanbiomes, near = {'group:water'}},
+        procoptodon = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
+        pteranodon = {intrvl = 5, chance = 0.5, biomes = highlandbiomes, near = {'group:soil'}},
+        quetzalcoatlus = {intrvl = 5, chance = 0.5, biomes = highlandbiomes, near = {'group:soil'}},
+        sarcosuchus = {intrvl = 5, chance = 0.5, biomes = shoresbiomes, near = {'group:water','group:sand'}},
+        smilodon = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
+        spinosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
+        stegosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
+        thylacoleo = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
+        triceratops = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
+        tyrannosaurus = {intrvl = 5, chance = 0.5, biomes = otherbiomes, near = {'group:soil'}},
         velociraptor = {intrvl = 1, chance = 0.4, group = 10, biomes = forestbiomes, near = {'default:dirt_with_coniferous_litter','default:dirt_with_rainforest_litter'}},
     }
     -- after defining these mobs, we can add mod dependant materials to the near array like this:
