@@ -10,7 +10,6 @@ minetest.register_on_mapgen_init(function()
     local highlandbiomes = {}
     local swampbiomes = {}
     for biome, entry in pairs(minetest.registered_biomes) do
-        -- minetest.log('debug', '[paleotest] Discovered biome named '..biome)
         table.insert(allbiomes, biome)
         if string.find(biome, 'ocean') then
             table.insert(oceanbiomes, biome)
@@ -30,7 +29,6 @@ minetest.register_on_mapgen_init(function()
             table.insert(otherbiomes, biome)
         end
     end
-    -- minetest.log("debug", "[MOD] PaleoTest found these "..table.getn(allbiomes).." biomes "..dump(allbiomes))
     local mob_list = {
         -- create item for every mob with fine-tuned settings here
         brachiosaurus = {intrvl = 5, chance = 0.5, group = 3, biomes = {unpack(shoresbiomes), unpack(swampbiomes), unpack(otherbiomes)}, nodes = {'group:soil','group:water'}},
@@ -59,16 +57,6 @@ minetest.register_on_mapgen_init(function()
     -- end
 
     for mob, def in pairs(mob_list) do
-        local spawn_timer = 0
-        minetest.register_globalstep(function(dtime)
-            spawn_timer = spawn_timer + dtime
-            if spawn_timer > (def.intrvl * paleotest.spawn_rate) then
-                if math.random(1, def.chance * paleotest.spawn_chance) == 1 then
-                    mob_core.spawn("paleotest:"..mob, def.nodes or {"group:soil", "group:stone"}, 0, minetest.LIGHT_MAX, -31000, 31000, 24, 256, def.group or 1, {biomes = def.biomes})
-                end
-                spawn_timer = 0
-            end
-        end)
-        -- mob_core.register_spawn({name = "paleotest:"..mob, nodes = def.nodes, optional = {biomes = def.biomes}}, def.intrvl, def.chance)
+        mob_core.register_spawn({name = "paleotest:"..mob, nodes = def.nodes, optional = {biomes = def.biomes}}, def.intrvl * paleotest.spawn_rate, def.chance*paleotest.spawn_chance)
     end
 end)
