@@ -407,7 +407,7 @@ function paleotest.breed(self, live) -- Breeding
 					else
 						minetest.add_entity(pos,"paleotest:egg_"..name.."_ent")
 					end
-					paleotest.particle_spawner(self.object:get_pos(), "heart.png", "float")
+					paleotest.particle_spawner(pos, "heart.png", "float")
 				end)
 			end
 		end
