@@ -6,3 +6,12 @@ block_breaking (Block Breaking) bool false
 
 #    If you're on a world that used a 1.x version of PaleoTest, keep this true
 legacy_convert (1.x to 2.0+ Conversion) bool true
+
+#    Allows mobs to spawn in the wild
+spawning (Allow Mobs to Spawn in the Wild) bool false
+
+#    Adjusts spawn rate of mobs
+spawn_rate (Spawn Rate Multiplier) float 1.0
+
+#    Adjust chance of mobs spawning. Number (can be decimal) ranging from 0 to 2
+spawn_chance (Spawn Chance Multiplier) float 1.0 0.0 2.0
