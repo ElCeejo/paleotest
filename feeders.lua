@@ -103,13 +103,21 @@ function paleotest.register_feeder(name, def)
             local inv = meta:get_inventory()
             local size = inv:get_size("items")
             local stack = inv:get_stack("items", 1)
-            while stack:get_count() <= 0 do
-                if size > 1 then
-                    for i = size, 2, -1 do
-                        inv:set_stack(i, stack:get_count(i - 1))
-                    end
+            while stack:get_count() < 1 do
+                for i = 1, size do
+                    local stack_i = inv:get_stack("items", i)
+                    inv:set_stack("items", i - 1, stack_i)
                 end
+                stack = inv:get_stack("items", 1)
             end
+            local def = minetest.registered_items[stack:get_name()]
+            local texture = def.inventory_image
+            if (not texture
+            or texture == "")
+            and def.tiles then
+                texture = def.tiles[1]
+            end
+            paleotest.particle_spawner(pos, texture, "splash")
             if stack:get_count() - take >= 0 then
                 stack:take_item(take)
                 inv:set_stack("items", 1, stack)
@@ -146,7 +154,6 @@ function paleotest.register_feeder(name, def)
                 local count = stack:get_count()
                 minetest.add_item(pos, item .. " " .. count)
             end
-            minetest.add_item(pos, name)
             minetest.remove_node(pos)
         end
     })
