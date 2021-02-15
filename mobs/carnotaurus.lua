@@ -120,12 +120,6 @@ local function carnotaurus_logic(self)
                     end
                 end
             end
-
-            if prty < 4 then
-                if math.random(1, 150) == 1 then
-                    paleotest.hq_roar(self, 4, "roar")
-                end
-            end
         end
 
         if prty < 2 then
