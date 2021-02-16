@@ -397,7 +397,7 @@ end
 
 function paleotest.hq_roar(self, prty)
 	local init = true
-	local duration = anim_length(self, "roar")
+	local duration = anim_length(self, "roar") or 0
 	local func=function(self)
 		if mobkit.is_queue_empty_low(self) then
 			if init then
